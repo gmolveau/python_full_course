@@ -83,7 +83,7 @@ print(f"{face!r}") # == repr(face)
 
 ### resources
 
-https://youtu.be/BxUxX1Ku1EQ - Python f-strings can do more than you thought. f'{val=}', f'{val!r}', f'{dt:%Y-%m-%d}' - mCoding
-https://he-arc.github.io/livre-python/fstrings/index.html
-https://python.sdv.univ-paris-diderot.fr/03_affichage/#322-prise-en-main-des-f-strings
-https://realpython.com/python-f-strings/#multiline-f-strings
+- https://youtu.be/BxUxX1Ku1EQ - Python f-strings can do more than you thought. f'{val=}', f'{val!r}', f'{dt:%Y-%m-%d}' - mCoding
+- https://he-arc.github.io/livre-python/fstrings/index.html
+- https://python.sdv.univ-paris-diderot.fr/03_affichage/#322-prise-en-main-des-f-strings
+- https://realpython.com/python-f-strings/#multiline-f-strings
