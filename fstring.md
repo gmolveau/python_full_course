@@ -30,6 +30,12 @@ Oh, and f-strings are faster than `.format` and `%` ! ;-)
 
 ## Example
 
+try this example :
+
+```bash
+python3 examples/fstring.py
+```
+
 ```python
 # literal curly braces
 print(f"{{ok}}")
