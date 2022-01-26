@@ -81,7 +81,7 @@ print(f"{face!a}") # == convert to ascii
 print(f"{face!r}") # == repr(face)
 ```
 
-### resources
+## Resources
 
 - https://youtu.be/BxUxX1Ku1EQ - Python f-strings can do more than you thought. f'{val=}', f'{val!r}', f'{dt:%Y-%m-%d}' - mCoding
 - https://he-arc.github.io/livre-python/fstrings/index.html

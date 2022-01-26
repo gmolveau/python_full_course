@@ -60,6 +60,8 @@ WARNING! Using --password via the CLI is insecure. Use --password-stdin.
     - XDG Base Directory compliant applications should first attempt to read these values from the environment variables, or fallback to the default paths if these variables aren’t set in the runtime environment.
     - example of an issue on the symfony project : https://github.com/symfony/cli/issues/56
 
+- be aware of `option-like arguments` like for example a negative integer. If you want to pass a negative integer as an argument, you need to use `-- ` before the arg. For example to enter `-4`, a user user must use `-- -4`. (https://click.palletsprojects.com/en/6.x/arguments/#option-like-arguments)
+
 ## Libs
 
 - argparse (from the stdlib) : https://docs.python.org/3/library/argparse.html
