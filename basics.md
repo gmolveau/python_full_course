@@ -78,7 +78,17 @@ Finally, you should **NOT** use reserved keywords for a variable name (eg. `dict
 quick explanation about functions, we're not going to too much into details here but we need to address the subject a little.
 
 TODO
+- Signature
+- Arguments positionnels vs. Arguments mots clés
+- Attention au nommage
+- DRY / YAGNI
+- fonction vs procedure : fonction renvoie une valeur et une procédure exécute uniquement des commandes
+- LGI : Lorsque Python rencontre une variable, il va traiter la résolution de son nom avec des priorités particulières. D'abord il va regarder si la variable est locale, puis si elle n'existe pas localement, il vérifiera si elle est globale et enfin si elle n'est pas globale, il testera si elle est interne
 
+- `def f(arg: type) -> None:`
+
+- `ts("obama", False, 20, True)`
+`twitter_search(username=‘@obama’, retweets=False, numtweets=20, unicode=True)`
 
 ## classes (intro)
 
@@ -87,6 +97,8 @@ wait, isn't it only the beginning of the course ? sorry again, we need to addres
 TODO
 
 ### methods
+
+TODO
 
 ## primitive/native data types
 
@@ -247,7 +259,13 @@ IndexError: list index out of range
 ```
 
 One of the under-rated feature of python is its negative index !
-If you want to access the last element of a list without having to calculate its size, use the `-1` index
+If you want to access the last element of a list without having to calculate its size, use the `-1` index !
+
+```python
+l = [1, 2, 3]
+#    0  1  2   --- positive index
+#   -3 -2 -1   --- negative index
+```
 
 ### Slicing
 
@@ -269,10 +287,8 @@ The syntax of a slice is as followed : `[<start>:<stop>:<step>]`.
 
 ### Common list methods
 
-What's a method ? later ;-)
-
-- `.append(<value>)` is used to add an object at the end of the list
-- `.pop()` returns *and removes* the last element of the list
+- `.append(<value>)` adds an element at the end of the list
+- `.pop()` *removes* the last element of the list and returns it
 - `.remove(<value>)` removes the first occurence of a value (or raises a `ValueError` if the value can't be found)
 - `.insert(<index>, <value>)` adds an element at the given index
 - `.index(<value>)` returns the index of the first occurence of a value (or raises a `ValueError` if the value can't be found)
@@ -405,17 +421,25 @@ If you wan't to edit them, you need to reassign them.
 
 ## strings (again!)
 
-a string is kinda like a `list` of characters ! So you can access each of its characters via its index. You can also loop on it.
+a `string` can be seen as a `list` of characters (because it is a `sequence`) ! You can access each of its characters via their index. You can also loop on it.
 
 ```python
 >>> s = "hello"
 >>> print(s[0])
 "h"
+>>> for letter in s:
+...     print(letter)
+...
+"h"
+"e"
+"l"
+"l"
+"o"
 ```
 
 ### common string methods
 
-- `<string>.join(<list>)` concat the argument list into a string, separated by the <string>
+- `<string>.join(<list>)` creates a new string with each element of `<list>`, separated by `<string>`
 - `.upper()` returns the string entirely in ALL CAPS
 - `.lower()` returns the string entirely in lowercase
 - `.capitalize()` returns the string with a Uppercase at the beginning
@@ -490,7 +514,7 @@ d, e, f = 4, 5, 6
 
 A `dict` is a key/value datastructure, created by placing a sequence of elements within curly braces `{}`.
 
-Keys of a `dict` needs to be immutable (int, float, string, tuple). But a `dict` is ont immutable.
+Keys of a `dict` needs to be immutable (int, float, string, tuple). But a `dict` is not immutable.
 
 You can access an element using square brackets and the key. `[<key>]`
 
@@ -516,12 +540,12 @@ KeyError: 'ok'
 
 ### common dict methods
 
-`.keys()` returns a list of all the keys
-`.values()` returns a list of all the values
-`.items()` returns a list of tuples which are the couples <key>, <value>
-`.get(<key>, [default])` returns an element for a key, if the key does not exist, `None` is returned, except if a `default` is provided
-`.setdefault(<key>, <value>)` set a default value for a key if it's not already set
-`.update({"four":4})` merges two dictionaries
+- `.keys()` returns a list of all the keys
+- `.values()` returns a list of all the values
+- `.items()` returns a list of tuples which are the couples <key>, <value>
+- `.get(<key>, [default])` returns an element for a key, if the key does not exist, `None` is returned, except if a `default` is provided
+- `.setdefault(<key>, <value>)` set a default value for a key if it's not already set
+- `.update({"four":4})` merges two dictionaries
 
 ```python
 >>> d = {"one": 1, "two": 2}
@@ -575,7 +599,7 @@ KeyError: 'one'
 
 ### unpacking (again!)
 
-Since pyhon 3.5, you can now unpack elements in a dict, resulting in a merge or an addition !
+Since python 3.5, you can now unpack elements in a dict, resulting in a `merge` or an `addition` !
 
 ```python
 >>> d = {'a': 1, **{'b': 2}} # addition because the key 'b' is not set
@@ -588,11 +612,11 @@ Since pyhon 3.5, you can now unpack elements in a dict, resulting in a merge or 
 
 ## sets
 
-a `set` is a collection of elements, all unique. It's like a list of unique elements. You can add multiple times the same object, but there will be only one occurence of this object in the set.
+a `set` is a collection of *unique* elements. You can add multiple times the same element, but there will be only one occurence of this element in the set.
 
-a `set` can be instancied with the function `set` or with curly braces (like dict) `{}`.
+a `set` can be instancied with the function `set` or with curly braces (like a dict) `{}`.
 
-a `set` must be composed only of immutable elements (strings, tuples, ints...). (like the keys of a dict).
+a `set` can contain only immutable elements (strings, tuples, ints...) (like the keys of a dict).
 
 ```python
 >>> empty_set = set()
@@ -602,7 +626,7 @@ a `set` must be composed only of immutable elements (strings, tuples, ints...). 
 {1, 2, 3, 4} # as we can see, 1 was already in the set so the addition didn't do anything
 ```
 
-Like a mathematical `set`, we can do mathematical operations with `sets` like intersection `&`, union `|`, difference `-` ...
+Like a mathematical `set`, we can do mathematical operations such as intersection `&`, union `|`, difference `-` ...
 
 ```python
 >>> s1 = {1,2,3,4}
@@ -617,7 +641,7 @@ Like a mathematical `set`, we can do mathematical operations with `sets` like in
 ```
 ### `in` keyword
 
-we can use the `in` keyword to check if an element exists in a `set`
+the `in` keyword can be used to check if an element exists in a `set`, and to iterate.
 
 ```python
 >>> s1 = {1,2,3,4}
@@ -625,15 +649,24 @@ we can use the `in` keyword to check if an element exists in a `set`
 True
 >>> 5 in s1
 False
+>>> for i in s1: # iterating
+...     print(i)
+...
+1
+2
+3
+4
 ```
 
 ## pointers, pass-by-value, pass-by-reference
 
-We need to talk about how python variables are passed between functions etc...
+We **need** to talk about how python variables are passed between functions etc...
 
-**Python is “pass-by-object-reference”**
+**Python is "pass-by-object-reference"**
 
-Rephrased, “Object references are passed by value". The variable is not the object
+This is equivalent to “object references are passed by value".
+
+The variable is not the object.
 
 Let's dig deeper. Take a look at the following examples and try to guess the answer :
 
@@ -669,25 +702,49 @@ True
 
 but what if we want `b` to be a copy of `a` and not a `reference` to it ? ;-)
 
-in the case of a `list`, if this list is a one-dimension `list` (meaning that they are not nested elements), we can use the power of slicing to make a copy
+we can use the `.copy()` method (or use a trick with slicing)
 
 ```python
 >>> a = [1,2,3]
+>>> b = a.copy()
+>>> a is b
+False
 >>> b = a[:] # remember, in slicing, the `[:]` is equal to [0 : len(<elem>)-1 : 1]
->>> a is b
-False
 ```
 
-if the list is multi-dimensional, we must create a `deep copy` via the `.deepcopy()` method :
+but be careful, with a "simple" `copy` like this, we don't clone the elements in the list, we just make new pointers to them.
+
+if you modify the new list, elements in the old list will be affected too ! this is called a `shallow copy`.
 
 ```python
->>> a = [1,2,3]
->>> b = a.deepcopy()
->>> a is b
-False
+>>> a = [[1,2,3],[4,5,6],[7,8,9]]
+>>> b = a.copy()
+>>> b
+[[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+>>> b[0][0] = "RIP"
+>>> a
+[['RIP', 2, 3], [4, 5, 6], [7, 8, 9]]
+>>> b
+[['RIP', 2, 3], [4, 5, 6], [7, 8, 9]]
 ```
 
-but what does it all mean ? well, you must remember that when you pass a list to a function, you pass the address of this list, so it can be modified by the function. And sometimes you don't want that. Here's an example
+if we really want to clone the entire list, we must create a `deep copy` with the `copy` module and its function `deepcopy()` :
+
+```python
+>>> import copy
+>>> a = [[1,2,3],[4,5,6],[7,8,9]]
+>>> b = copy.deepcopy(a)
+>>> b[0][0] = "RIP"
+>>> a
+[[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+>>> b
+[['RIP', 2, 3], [4, 5, 6], [7, 8, 9]]
+# yay !
+```
+
+but what does it all mean ? well, you must remember that when you pass a `list` to a `function`, you pass the `address` of this list, so it can be modified by the `function`. And sometimes you don't want that.
+
+Here's an example :
 
 ```python
 def reassign(l):
@@ -703,9 +760,9 @@ def reassign(l):
 # yes we pass the list `l` by reference, but we reassign the local variable to something else
 ```
 
-the previous example can be confusing because the local variable has the same name as the the other variable
+the previous example can be confusing because the `local variable` of the `function` has the same name as the the other variable (`l`).
 
-we can write it like this for more clarity :
+we can rewrite it for more clarity :
 
 ```python
 def reassign(local_l):
@@ -716,7 +773,6 @@ def reassign(local_l):
 ```
 
 BUT when you don't know how python works, you can think that this list will not be modified simply because it doesn't have the same name (not true !)
-
 
 so here's the final ~straw~ example :-)
 
@@ -738,7 +794,7 @@ def do_smth(local_l):
 source :
 - https://robertheaton.com/2014/02/09/pythons-pass-by-object-reference-as-explained-by-philip-k-dick/
 
-## `range` build-in function
+## `range` built-in function
 
 `range` is a powerful function, which can be used in various ways :
 
@@ -752,13 +808,83 @@ source :
 [5, 7, 9]
 ```
 
-## loops
+## conditions
 
 TODO
+If / elif / else
+break
+continue
+
+
+## loops
+
+TODO ok
+
+For
+    la clause else # equivalent to a `if no break`
+    Si objet séquentiel
+    Si vous utilisez les index, cest que vous le faites surement pas bien
+    range function
+    enumerate function
+While
+
+exercice : create a program which takes in input a number of lines, and print a pyramid.
+
+```python
+# example of a pyramid of 4 lines
+   *
+  ***
+ *****
+*******
+```
+
+
+### dict
+
+loop over keys
+```python
+for key in d:
+       print(key)
+```
+
+loop over key and value
+```python
+for k, v in d.items():
+    print(f"{k} --> {v}")
+```
+
+cornercase avec cette façon de faire ?
+On ne peut pas muter un dict lorsque l’on itère dessus
+
+```python
+d = {"ok": 0, "nok": -1}
+for k in d:
+    if k == "ok":
+        del d[k]
+```
+
+préférer :
+
+```python
+d = {"ok": 0, "nok": -1}
+for k in d.keys():
+    if k == 'ok':
+        del d[k]
+```
+
+
 
 ## comprehension
 
 TODO
+dict `{k:k**2 for k in range(10)}`
+
+```
+[i for i in range(10)]
+[i for i in range(1, 20) if i % 2 == 0]
+L = []
+
+```
 
 --- RESTE A FAIRE / TODO / NOTES DU COURS A REPRENDRE ET REDIGER
 
@@ -851,8 +977,8 @@ boucle
     iter
 
 dir()
-help()
-sorted()
+help() - how to use it + how does it work (docstrings)
+sorted() - sorted(, key)
 
 fonction (vs procedure)
     signature
@@ -917,11 +1043,11 @@ dictionnaires
 
     linking :
         collections.ChainMap
-sets
+
 fichier
 binaire
 modules / package
-    docstring (vs comment)
+    docstring
 
 iterators
 
