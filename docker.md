@@ -1,7 +1,3 @@
 # Docker
 
-
-
 ## Resources
-
-- x

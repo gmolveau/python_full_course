@@ -171,7 +171,7 @@ if __name__ == '__main__':
     root()
 ```
 
-## Resources :
+## Resources
 
 - https://en.wikipedia.org/wiki/Unix_philosophy
 - https://danluu.com/cli-complexity/

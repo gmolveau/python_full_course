@@ -16,7 +16,7 @@ Here's a good example of the power of a jupyter notebook :
 
 ## Resources
 
-- https://nbviewer.org/github/xun-tang/pyladies_jupyter_demo/blob/master/Predict_Review_Five_Star_Rating.ipynb
-- https://github.com/jupyter/jupyter/wiki
-- https://jupyter-notebook.readthedocs.io/en/stable/examples/Notebook/examples_index.html
-- https://python.sdv.univ-paris-diderot.fr/18_jupyter/
+- <https://nbviewer.org/github/xun-tang/pyladies_jupyter_demo/blob/master/Predict_Review_Five_Star_Rating.ipynb>
+- <https://github.com/jupyter/jupyter/wiki>
+- <https://jupyter-notebook.readthedocs.io/en/stable/examples/Notebook/examples_index.html>
+- <https://python.sdv.univ-paris-diderot.fr/18_jupyter/>

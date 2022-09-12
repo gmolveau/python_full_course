@@ -1,1 +1,0 @@
-# Pip / dependency manager

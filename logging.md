@@ -1,5 +1,3 @@
 # Logging
 
 ## Resources
-
-- x

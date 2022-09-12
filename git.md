@@ -2,7 +2,7 @@
 
 ## .gitignore
 
-```
+```plaintext
 # Created by https://www.toptal.com/developers/gitignore/api/python
 # Edit at https://www.toptal.com/developers/gitignore?templates=python
 

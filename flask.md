@@ -1,5 +1,3 @@
 # Flask
 
 ## Resources
-
-- x

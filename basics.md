@@ -5,11 +5,52 @@ Python 3.0 final was released on December 3rd, 2008.
 
 So please use python3 ;-) #nomorepython2
 
+Its name is based on the "Monty Python".
+
 Python is :
 - an interpreted language
 - [strongly typed and dynamically typed](https://wiki.python.org/moin/Why%20is%20Python%20a%20dynamic%20language%20and%20also%20a%20strongly%20typed%20language)
     - note : python can also be statically typed through [`type hinting`](https://www.python.org/dev/peps/pep-0484/)
+    - Note: some languages are weakly typed (JavaScript), some are strongly typed (Python) and some are statically typed (Go, Rust). Being strongly typed means you can't perform operations inappropriate to the type, so for example: in Python you can't add a number typed variable with a string typed variable.
 - garbage collected
+
+### ZEN of python
+
+A collection of 19 principles that influence the conception and usage of the language.
+
+```python
+>>> import this
+The Zen of Python, by Tim Peters
+
+Beautiful is better than ugly.
+Explicit is better than implicit.
+Simple is better than complex.
+Complex is better than complicated.
+Flat is better than nested.
+Sparse is better than dense.
+Readability counts.
+Special cases aren't special enough to break the rules.
+Although practicality beats purity.
+Errors should never pass silently.
+Unless explicitly silenced.
+In the face of ambiguity, refuse the temptation to guess.
+There should be one-- and preferably only one --obvious way to do it.
+Although that way may not be obvious at first unless you're Dutch.
+Now is better than never.
+Although never is often better than *right* now.
+If the implementation is hard to explain, it's a bad idea.
+If the implementation is easy to explain, it may be a good idea.
+Namespaces are one honking great idea -- let's do more of those!
+```
+
+### CPython
+
+CPython ? What is that ?
+
+> CPython is the reference implementation of the Python programming language. Written in C and Python, CPython is the default and most widely used implementation of the Python language.
+
+CPython can be defined as both an interpreter and a compiler as it compiles Python code into bytecode before interpreting it.
+> -- [Wikipedia](https://en.wikipedia.org/wiki/CPython)
 
 /!\ **Everything in Python is an object.**
 
@@ -73,32 +114,13 @@ usernames = ["greg", "alex"]
 
 Finally, you should **NOT** use reserved keywords for a variable name (eg. `dict`, `from`)
 
-## functions (intro)
-
-quick explanation about functions, we're not going to too much into details here but we need to address the subject a little.
-
-TODO
-- Signature
-- Arguments positionnels vs. Arguments mots clés
-- Attention au nommage
-- DRY / YAGNI
-- fonction vs procedure : fonction renvoie une valeur et une procédure exécute uniquement des commandes
-- LGI : Lorsque Python rencontre une variable, il va traiter la résolution de son nom avec des priorités particulières. D'abord il va regarder si la variable est locale, puis si elle n'existe pas localement, il vérifiera si elle est globale et enfin si elle n'est pas globale, il testera si elle est interne
-
-- `def f(arg: type) -> None:`
-
-- `ts("obama", False, 20, True)`
-`twitter_search(username=‘@obama’, retweets=False, numtweets=20, unicode=True)`
-
-## classes (intro)
-
-wait, isn't it only the beginning of the course ? sorry again, we need to address this subject too :)
+### Memory management (under the hood)
 
 TODO
 
-### methods
+<https://realpython.com/pointers-in-python/>
 
-TODO
+<https://pythontutor.com/render.html#code=a%20%3D%20%22yes%22%0Ab%20%3D%20%22no%22%0Al%20%3D%20%5Ba,b%5D%0Al.append%283%29&cumulative=true&curInstr=4&heapPrimitives=true&mode=display&origin=opt-frontend.js&py=3&rawInputLstJSON=%5B%5D&textReferences=false>
 
 ## primitive/native data types
 
@@ -232,6 +254,98 @@ We can dig deeper with the help of the `id` function, which returns the memory a
 
 `None` is an object. Always use `is` to compare a variable to `None`.
 
+### mutability
+
+some `sequences` (`tuples` and `strings` for example) are `immutable` which means that you can't edit them after creation.
+
+```python
+>>> s = "hello"
+>>> s[0] = "a"
+TypeError: 'str' object does not support item assignment
+>>> t = (1, 2, 3)
+>>> t[0] = 4
+TypeError: 'tuple' object does not support item assignment
+```
+
+If you wan't to edit them, you need to reassign them.
+
+```python
+>>> s = "hello"
+>>> s = "a" + s[1:]
+>>> print(s)
+"aello"
+```
+
+### type hinting
+
+[PEP 484](https://www.python.org/dev/peps/pep-0484/)
+
+## functions (intro)
+
+quick explanation about functions, we're not going to too much into details here but we need to address the subject a little.
+
+definition - def f()
+
+call - f()
+
+TODO
+
+- Signature
+- Arguments positionnels vs. Arguments mots clés
+- Attention au nommage
+- DRY / YAGNI
+- fonction vs procedure : fonction renvoie une valeur et une procédure exécute uniquement des commandes
+- LGI : Lorsque Python rencontre une variable, il va traiter la résolution de son nom avec des priorités particulières. D'abord il va regarder si la variable est locale, puis si elle n'existe pas localement, il vérifiera si elle est globale et enfin si elle n'est pas globale, il testera si elle est interne
+
+- `def f(arg: type) -> None:`
+
+- `ts("obama", False, 20, True)`
+`twitter_search(username=‘@obama’, retweets=False, numtweets=20, unicode=True)`
+
+- attention aux arguments par défaut
+
+```python
+def oops(l = []):
+    l.append("ok")
+    return l
+
+print(oops())
+print(oops())
+# ["ok"]
+# ["ok", "ok"]
+```
+
+- visualize memory here : <https://pythontutor.com/render.html#code=def%20oops%28l%20%3D%20%5B%5D%29%3A%0A%20%20%20%20l.append%28%22ok%22%29%0A%20%20%20%20return%20l%0A%0Aprint%28oops%28%29%29%0Aprint%28oops%28%29%29&cumulative=true&curInstr=11&heapPrimitives=true&mode=display&origin=opt-frontend.js&py=3&rawInputLstJSON=%5B%5D&textReferences=false>
+
+## built-in functions
+
+dir()
+help()
+
+## classes (intro)
+
+wait, isn't it only the beginning of the course ? sorry again, we need to address this subject too :)
+
+TODO
+
+### methods
+
+TODO
+
+### magic methods
+
+TODO
+
+`__len__`
+
+## printing
+
+TODO
+
+### f-string
+
+TODO
+
 ## Lists
 
 A list is a `sequence object` that stores an ordered sequence of objects, which can be of different types (even lists, yes).
@@ -263,8 +377,18 @@ If you want to access the last element of a list without having to calculate its
 
 ```python
 l = [1, 2, 3]
-#    0  1  2   --- positive index
-#   -3 -2 -1   --- negative index
+#    0  1  2   ---> positive index
+#   -3 -2 -1   ---> negative index
+```
+
+also works for string obviously :
+
+```python
++---+---+---+---+---+---+
+| P | y | t | h | o | n |
++---+---+---+---+---+---+
+  0   1   2   3   4   5   6
+ -6  -5  -4  -3  -2  -1
 ```
 
 ### Slicing
@@ -397,28 +521,6 @@ IndexError: list assignment index out of range
 3
 ```
 
-## immutability
-
-some `sequences` (`tuples` and `strings` for example) are `immutable` which means that you can't edit them after creation.
-
-```python
->>> s = "hello"
->>> s[0] = "a"
-TypeError: 'str' object does not support item assignment
->>> t = (1, 2, 3)
->>> t[0] = 4
-TypeError: 'tuple' object does not support item assignment
-```
-
-If you wan't to edit them, you need to reassign them.
-
-```python
->>> s = "hello"
->>> s = "a" + s[1:]
->>> print(s)
-"aello"
-```
-
 ## strings (again!)
 
 a `string` can be seen as a `list` of characters (because it is a `sequence`) ! You can access each of its characters via their index. You can also loop on it.
@@ -435,6 +537,22 @@ a `string` can be seen as a `list` of characters (because it is a `sequence`) ! 
 "l"
 "l"
 "o"
+```
+
+Two or more string _literals_ (i.e. the ones enclosed between quotes) next to each other are automatically concatenated.
+
+```python
+>>> 'Py' 'thon'
+'Python'
+```
+
+This feature is particularly useful when you want to break long strings:
+
+```python
+>>> text = ('Put several strings within parentheses '
+...         'to have them joined together.')
+>>> text
+'Put several strings within parentheses to have them joined together.'
 ```
 
 ### common string methods
@@ -472,6 +590,22 @@ False
 # index  012345678
 4 # index 4 ;)
 ```
+
+### ellipsis
+
+`...` in python is called `ellipsis`. It is a string literal.
+
+One of its main purpose is placeholding (just like `pass`). For example if you declare a class without attribute (like a custome Exception for example), you can use the `ellipsis` as a placeholder.
+
+```python
+class CustomException:
+    ...
+
+class CustomeException:
+    pass
+```
+
+But the `no-op` instruction `pass` is prefered and much older than the `ellipsis` so use `pass` instead :)
 
 ## tuples
 
@@ -808,6 +942,8 @@ source :
 [5, 7, 9]
 ```
 
+(Want to see its source code ? <https://github.com/python/cpython/blob/5fcfdd87c9b5066a581d3ccb4b2fede938f343ec/Objects/rangeobject.c#L76>)
+
 ## conditions
 
 TODO
@@ -872,7 +1008,52 @@ for k in d.keys():
         del d[k]
 ```
 
+## functions (again!)
 
+### `*args` and `**kwargs`
+
+When a final formal parameter of the form `**name` is present, it receives a dictionary (see Mapping Types — dict) containing all keyword arguments except for those corresponding to a formal parameter. This may be combined with a formal parameter of the form *name (described in the next subsection) which receives a tuple containing the positional arguments beyond the formal parameter list. (`*name` must occur before `**name`.) For example, if we define a function like this:
+
+```python
+def foo(bar, *args, **kwargs):
+    print(bar)
+    print("-" * 20)
+    for arg in args:
+        print(f"arg : {arg}")
+    print("-" * 20)
+    for k in kwargs:
+        print(f"kwarg: {k} => {kwargs[k]}")
+```
+
+It could be called like this:
+
+```python
+foo("a", "b", "c", k1="v1", k2="v2")
+```
+
+and of course it would print:
+
+```
+a
+--------------------
+arg : b
+arg : c
+--------------------
+kwarg: k1 => v1
+kwarg: k2 => v2
+```
+
+### type annotation
+
+Function annotations are completely optional metadata information about the types used by user-defined functions.
+
+Annotations are stored in the **annotations** attribute of the function as a dictionary and have no effect on any other part of the function.
+
+```python
+def foo(bar: str) -> str:
+    print(bar)
+    return "ok"
+```
 
 ## comprehension
 
@@ -886,7 +1067,97 @@ L = []
 
 ```
 
---- RESTE A FAIRE / TODO / NOTES DU COURS A REPRENDRE ET REDIGER
+## modules/packages/libraries
+
+TODO
+
+    __name__ == "__main__"
+
+## file handling
+
+TODO
+
+## Bonnes pratiques
+
+TODO
+
+### PEP8
+
+### Google styling guide
+
+- [Google Python Styling Guide](https://google.github.io/styleguide/pyguide.html)
+
+### Documentation
+
+TODO
+peut etre merge avec commentaires ? pour parler doctstring etc ?
+
+### DRY
+
+### YAGNI
+
+# Advanced
+
+## protocol
+
+TODO
+
+In Python a protocol is an informal interface. Protocols are either known as an accepted truth or defined in documentation and not strictly in code1. For example, any class that implements the `__container__()` special method is said to follow the "container protocol." While this is an accepted truth, there is no syntax in the Python language that declares a class as following a protocol. Python classes can also implement multiple protocols.
+
+## decorators
+
+TODO
+
+## iterators
+
+TODO
+
+## context manager
+
+TODO
+
+## exceptions - try/except
+
+Analogy : Imagine that you order something on the web, and during the delivery you're not at home. `Error handling` in this context means that the delivery company should be able to deliver your package another time/place so you can have it.
+
+TODO
+
+## generators
+
+TODO
+
+## OOP
+
+TODO
+
+## functional
+
+TODO
+
+## Design patterns
+
+TODO
+
+> a design pattern is a general repeatable solution to a commonly occurring problem in software design. A design pattern isn't a finished design that can be transformed directly into code. It is a description or template for how to solve a problem that can be used in many different situations.
+
+- <https://python-patterns.guide/>
+- <https://github.com/faif/python-patterns>
+
+## Threading
+
+TODO
+
+GIL
+
+## Testing
+
+TODO
+
+## env
+
+TODO
+
+## RESTE A FAIRE
 
 affichage
     print
@@ -1063,6 +1334,18 @@ context manager
     with suppress(FileNotFoundError):
         os.remove('somefile.tmp')
 
+    from contextlib import contextmanager
+
+    @contextmanager
+    def open_db(filename: str):
+        try:
+            con = sqlite3.connect(filename)
+            yield con
+        except sqlite3.DatabaseError as err:
+            logger.error(err    )
+        finally:
+            con.close()
+
 one liner : 1 ligne de code = 1 phrase en francais
 
 bonnes pratiques
@@ -1090,25 +1373,15 @@ conventions (snake case, globals in all-caps)
 
 
 Voici quelques conseils pour vous aider à concevoir un script Python.
-- Réfléchissez avec un papier, un crayon. . . et un cerveau (voire même plusieurs) ! Reformulez avec des mots en français
-(ou en anglais) les consignes qui vous ont été données ou le cahier des charges qui vous a été communiqué. Dessinez
-ou construisez des schémas si cela vous aide.
-- Découpez en fonctions chaque élément de votre programme. Vous pourrez ainsi tester chaque élément indépendam-
-ment du reste. Pensez à écrire les docstrings en même temps que vous écrivez vos fonctions.
-- Quand l’algorithme estc omplexe, commentez votre code pour expliquer votre raisonnement. Utiliser des fonctions(ou
-méthodes) encore plus petites peut aussi être une solution.
-- Documentez-vous. L’algorithme dont vous avez besoin existe-t-il déjà dans un autre module ? Existe-t-il sous la forme
-de pseudo-code ? De quels outils mathématiques avez-vous besoin dans votre algorithme ?
-- Si vous créez ou manipulez une entité cohérente avec des propriétés propres, essayez de construire une classe. Jetez,
-pour cela, un oeil au chapitre 19 Avoir la classe avec les objets.
-- Utilisez des noms de variables explicites, qui signifient quelquechose. En lisant votre code, on doit comprendre ce que
-vous faites. Choisir des noms de variables pertinents permet aussi de réduire les commentaires.
-- Quand vous construisez une structure de données complexe (par exemple une liste de dictionnaires contenant d’autres
-objets), documentez et illustrez l’organisation de cette structure de données sur un exemple simple.
-- Testez toujours votre code sur un jeu de données simple pour pouvoir comprendre rapidement ce qui se passe. Par exemple, une séquence de 1000 bases est plus facile à gérer que le génome humain ! Cela vous permettra également
-de retrouver plus facilement une erreur lorsque votre programme ne fait pas ce que vous souhaitez.
-- Lorsque votre programme « plante », lisez le message d’erreur. Python tente de vous expliquer ce qui ne va pas. Le
-numéro de la ligne qui pose problème est aussi indiqué.
+- Réfléchissez avec un papier, un crayon... et un cerveau (voire même plusieurs) ! Reformulez avec des mots en français (ou en anglais) les consignes qui vous ont été données ou le cahier des charges qui vous a été communiqué. Dessinez ou construisez des schémas si cela vous aide.
+- Découpez en fonctions chaque élément de votre programme. Vous pourrez ainsi tester chaque élément indépendamment du reste. Pensez à écrire les docstrings en même temps que vous écrivez vos fonctions.
+- Quand l’algorithme estc omplexe, commentez votre code pour expliquer votre raisonnement. Utiliser des fonctions(ou méthodes) encore plus petites peut aussi être une solution.
+- Documentez-vous. L’algorithme dont vous avez besoin existe-t-il déjà dans un autre module ? Existe-t-il sous la forme de pseudo-code ? De quels outils mathématiques avez-vous besoin dans votre algorithme ?
+- Si vous créez ou manipulez une entité cohérente avec des propriétés propres, essayez de construire une classe.
+- Utilisez des noms de variables explicites, qui signifient quelquechose. En lisant votre code, on doit comprendre ce que vous faites. Choisir des noms de variables pertinents permet aussi de réduire les commentaires.
+- Quand vous construisez une structure de données complexe (par exemple une liste de dictionnaires contenant d’autres objets), documentez et illustrez l’organisation de cette structure de données sur un exemple simple.
+- Testez toujours votre code sur un jeu de données simple pour pouvoir comprendre rapidement ce qui se passe. Par exemple, une séquence de 1000 bases est plus facile à gérer que le génome humain ! Cela vous permettra également de retrouver plus facilement une erreur lorsque votre programme ne fait pas ce que vous souhaitez.
+- Lorsque votre programme « plante », lisez le message d’erreur. Python tente de vous expliquer ce qui ne va pas. Le numéro de la ligne qui pose problème est aussi indiqué.
 - Discutez avec des gens. Faites tester votre programme par d’autres. Les instructions d’utilisation sont-elles claires ?
 - Si vous distribuez votre code :
 - Rédigez une documentation claire.
