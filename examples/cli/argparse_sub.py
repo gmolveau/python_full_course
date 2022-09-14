@@ -1,9 +1,10 @@
 import argparse
 
 
-def main():
-    parser = argparse.ArgumentParser(description="cli example with a boolean arg")
-    parser.add_argument(
+def cli():
+    parser = argparse.ArgumentParser(description="a git cli example")
+    base_parser = argparse.ArgumentParser(add_help=False)
+    base_parser.add_argument(
         "-v",
         "--verbose",
         help="Common top-level parameter",
@@ -11,13 +12,23 @@ def main():
         required=False,
     )
     subparsers = parser.add_subparsers(dest="command")
-    db_parser = subparsers.add_parser(
-        "db", description="db command", help="manage the db"
+    # clone command
+    clone_parser = subparsers.add_parser(
+        "clone", description="clone command", help="clone a repo", parents=[base_parser]
     )
-    db_parser.add_argument("--url", help="database url")
+    clone_parser.add_argument("url", help="repo url")
+    # commit command
+    commit_parser = subparsers.add_parser(
+        "commit", description="commit command", help="commit files", parents=[base_parser]
+    )
+    commit_parser.add_argument("-m", help="commit message")
     args = parser.parse_args()
-    print(args)
+    return args
 
+def main():
+    args = cli()
+    print(args)
+    print(f"la commande lancée est {args.command}")
 
 if __name__ == "__main__":
     main()
