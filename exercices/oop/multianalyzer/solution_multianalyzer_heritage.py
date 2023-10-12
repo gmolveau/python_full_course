@@ -9,7 +9,7 @@ class Result:
 
 class Report:
     def __init__(self, results: list[Result] | None = None) -> None:
-        self.results = results
+        self.results = results or []
 
     @property
     def score(self):
